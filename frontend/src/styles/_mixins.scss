@@ -1,0 +1,77 @@
+// Flexbox Center
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex Column
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Card Style
+@mixin card($padding: $spacing-md) {
+  background: white;
+  border-radius: $radius-lg;
+  padding: $padding;
+  box-shadow: $shadow-md;
+}
+
+// Gradient Text
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Hover Scale
+@mixin hover-scale($scale: 1.05) {
+  transition: transform $transition-normal;
+  
+  &:hover {
+    transform: scale($scale);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Responsive
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+// Button Base
+@mixin button-base {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: $radius-md;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-normal;
+  @include flex-center;
+  gap: 0.5rem;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

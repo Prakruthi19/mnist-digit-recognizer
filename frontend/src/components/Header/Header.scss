@@ -1,0 +1,32 @@
+@import '../../styles/variables';
+
+.header {
+  background: $gradient-primary;
+  color: white;
+  padding: $spacing-xl;
+  text-align: center;
+  border-radius: $radius-xl $radius-xl 0 0;
+
+  &__title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: $spacing-sm;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
+  }
+  
+  &__subtitle {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    margin-bottom: $spacing-xs;
+    
+  
+  }
+  
+  &__description {
+    font-size: 1rem;
+    opacity: 0.85;
+    font-style: italic;
+  
+  }
+}

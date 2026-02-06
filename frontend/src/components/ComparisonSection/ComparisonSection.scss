@@ -1,0 +1,101 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.comparison {
+  margin: 0 $spacing-lg $spacing-lg;
+  padding: $spacing-lg;
+  background: linear-gradient(to right, #fef3c7, #fde68a);
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  
+  @include mobile {
+    margin: 0 $spacing-sm $spacing-sm;
+  }
+  
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-align: center;
+    color: #1f2937;
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &__card {
+    @include card($spacing-lg);
+    text-align: center;
+    animation: slideUp 0.5s ease-out;
+    
+    .card__label {
+      font-size: 0.875rem;
+      color: #6b7280;
+      font-weight: 600;
+      margin-bottom: $spacing-sm;
+    }
+    
+    .card__digit {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: $spacing-sm;
+      
+      @include mobile {
+        font-size: 2.5rem;
+      }
+    }
+    
+    .card__confidence {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #374151;
+    }
+    
+    .card__status {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    
+    &--mlp .card__digit {
+      color: $mlp-color;
+    }
+    
+    &--cnn .card__digit {
+      color: $cnn-color;
+    }
+    
+    &--winner {
+      background: $gradient-primary;
+      color: white;
+      
+      .card__label,
+      .card__digit,
+      .card__confidence,
+      .card__status {
+        color: white;
+      }
+      
+      .card__label {
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

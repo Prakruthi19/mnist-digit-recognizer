@@ -1,0 +1,42 @@
+// Colors
+$primary-purple: #667eea;
+$primary-indigo: #764ba2;
+$mlp-color: #ef4444;
+$cnn-color: #10b981;
+$warning-color: #fdcb6e;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, $primary-purple 0%, $primary-indigo 100%);
+$gradient-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$gradient-mlp: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+$gradient-cnn: linear-gradient(90deg, #10b981 0%, #059669 100%);
+$gradient-light: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// Border Radius
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-xl: 30px;
+
+// Shadows
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Breakpoints
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+$breakpoint-desktop: 1440px;

@@ -1,0 +1,59 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.prediction-display {
+  @include card($spacing-lg);
+  background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+  
+  &--mlp {
+    border-left: 5px solid $mlp-color;
+  }
+  
+  &--cnn {
+    border-left: 5px solid $cnn-color;
+  }
+  
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+  
+  &__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+  }
+  
+  &__result {
+    @include card;
+    background: $gradient-light;
+    text-align: center;
+    padding: $spacing-xl;
+    margin-bottom: $spacing-md;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    
+    .result__digit {
+      font-size: 5rem;
+      font-weight: 700;
+      margin-bottom: $spacing-sm;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      
+      @include mobile {
+        font-size: 4rem;
+      }
+    }
+    
+    .result__confidence {
+      font-size: 1.125rem;
+      color: #6b7280;
+      font-weight: 500;
+    }
+  }
+}

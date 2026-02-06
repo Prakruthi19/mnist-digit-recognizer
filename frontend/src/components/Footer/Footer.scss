@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.footer {
+  background: #f3f4f6;
+  padding: $spacing-lg;
+  text-align: center;
+  color: #6b7280;
+  border-radius: 0 0 $radius-xl $radius-xl;
+  
+  &__text {
+    margin-bottom: $spacing-xs;
+    font-size: 0.9375rem;
+  }
+  
+  &__link {
+    color: $primary-purple;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: $spacing-xs;
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: $primary-indigo;
+      text-decoration: underline;
+    }
+  }
+  
+  &__tech {
+    font-size: 0.875rem;
+    color: #9ca3af;
+  }
+}
