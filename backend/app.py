@@ -22,13 +22,42 @@ from tensorflow import keras
 print("=" * 60)
 print("🚀 Starting MNIST Digit Recognition Server")
 print("=" * 60)
+# print(f"TensorFlow version: {tf.__version__}")
+# print(f"Keras version: {keras.__version__}")
+print()
 
-# Load trained models
+# Load trained models with compile=False to avoid version issues
 print("📦 Loading models...")
-mlp_model = keras.models.load_model('../saved_models/mlp_model_fixed.keras')
-cnn_model = keras.models.load_model('../saved_models/cnn_model_fixed.keras')
+try:
+    # Load without compiling (skips the batch_shape issue)
+    mlp_model = keras.models.load_model('../models/saved_models/mlp_model.keras')
+    cnn_model = keras.models.load_model('../models/saved_models/cnn_model.keras')
+    
+    # Recompile models manually
+    print("🔧 Recompiling models...")
+    mlp_model.compile(
+        optimizer='adam',
+        loss='categorical_crossentropy',
+        metrics=['accuracy']
+    )
+    
+    cnn_model.compile(
+        optimizer='adam',
+        loss='categorical_crossentropy',
+        metrics=['accuracy']
+    )
+    
+    print("✅ Models loaded and compiled successfully!")
+    
+except Exception as e:
+    print(f"❌ Error loading models: {e}")
+    print()
+    print("💡 Solutions:")
+    print("   1. Make sure TensorFlow versions match between training and deployment")
+    print("   2. Retrain models with: pip install tensorflow==2.15.0")
+    print("   3. Check if model files exist in '../saved_models/'")
+    exit(1)
 
-print("✅ Models loaded successfully!")
 print()
 
 # Initialize Flask app
@@ -50,7 +79,8 @@ def health_check():
     return jsonify({
         'status': 'healthy',
         'mlp_loaded': mlp_model is not None,
-        'cnn_loaded': cnn_model is not None
+        'cnn_loaded': cnn_model is not None,
+        'tensorflow_version': tf.__version__
     })
 
 @app.route('/predict', methods=['POST'])
@@ -76,14 +106,14 @@ def predict():
         image = Image.open(io.BytesIO(image_bytes))
         
         # Preprocess for MLP (flattened)
-        image_mlp = preprocess_image(image, model_type='mlp')
+        image_mlp = preprocess_image(image, model_type='mlp', debug=False)
         
         # Preprocess for CNN (2D with channel)
-        image_cnn = preprocess_image(image, model_type='cnn')
+        image_cnn = preprocess_image(image, model_type='cnn', debug=False)
         
         # Get predictions from both models
-        mlp_prediction = predict_digit(mlp_model, image_mlp)
-        cnn_prediction = predict_digit(cnn_model, image_cnn)
+        mlp_prediction = predict_digit(mlp_model, image_mlp, debug=False)
+        cnn_prediction = predict_digit(cnn_model, image_cnn, debug=False)
         
         # Generate Grad-CAM heatmap for CNN
         gradcam_image = generate_gradcam(cnn_model, image_cnn, cnn_prediction['digit'])
@@ -99,6 +129,8 @@ def predict():
     
     except Exception as e:
         print(f"❌ Error during prediction: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
 @app.route('/compare', methods=['POST'])
@@ -119,11 +151,11 @@ def compare_models():
         image = Image.open(io.BytesIO(image_bytes))
         
         # Get predictions
-        image_mlp = preprocess_image(image, model_type='mlp')
-        image_cnn = preprocess_image(image, model_type='cnn')
+        image_mlp = preprocess_image(image, model_type='mlp', debug=False)
+        image_cnn = preprocess_image(image, model_type='cnn', debug=False)
         
-        mlp_result = predict_digit(mlp_model, image_mlp)
-        cnn_result = predict_digit(cnn_model, image_cnn)
+        mlp_result = predict_digit(mlp_model, image_mlp, debug=False)
+        cnn_result = predict_digit(cnn_model, image_cnn, debug=False)
         
         # Calculate comparison metrics
         comparison = {
@@ -141,6 +173,9 @@ def compare_models():
         })
     
     except Exception as e:
+        print(f"❌ Error during comparison: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
 # ============================================================
