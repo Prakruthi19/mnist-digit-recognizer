@@ -157,7 +157,8 @@ This ensures compatibility with MNIST training distribution.
 
 ### Drawing & Prediction Page
 <img src="assets/image1.png" width="800"/>
-<img src="assets/image.png" width = "700">
+<img src="assets/image.png" width = "800">
+
 ## 👨‍💻 Author
 
 **Prakruthi Koteshwar**
