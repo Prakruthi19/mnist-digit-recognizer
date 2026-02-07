@@ -5,7 +5,7 @@ The project compares a Multilayer Perceptron (MLP) and a Convolutional Neural Ne
 
 ## 🚀 Features
 
-- Predict handwritten digits from uploaded images
+- Predict handwritten digits from drawing numbers
 - Two model architectures:
   - MLP (Baseline Model)
   - CNN (Optimized Model)
@@ -65,8 +65,8 @@ mnist-digit-recognizer/
 ├── backend/
 │   ├── app.py
 │   ├── model/
-│   │   ├── cnn_model.h5
-│   │   └── mlp_model.h5
+│   │   ├── train_cnn.py
+│   │   └── train_mlp.py
 │   ├── utils/
 │   │   └── preprocess.py
 │   └── requirements.txt
@@ -88,7 +88,7 @@ cd mnist-digit-recognizer/backend
 ### 2) Create virtual environment (Python 3.10 recommended)
 ```bash
 py -3.10 -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\activate
 ```
 
 ### 3) Install dependencies
@@ -103,7 +103,7 @@ Start backend server:
 uvicorn app:app --reload
 ```
 
-Server will run at: `http://127.0.0.1:8000`
+Server will run at: `http://localhost:5000`
 
 ## 📥 API Endpoint
 
@@ -149,11 +149,15 @@ This ensures compatibility with MNIST training distribution.
 
 ## 🔮 Future Improvements
 
-- Support multiple digit detection
+- Support multiple digit detection and text recognition
 - Deploy to cloud
-- Add drawing canvas UI
 - Quantized lightweight model for mobile
 
+## Application Screenshots
+
+### Drawing & Prediction Page
+<img src="assets/image1.png" width="800"/>
+<img src="assets/image.png" width = "700">
 ## 👨‍💻 Author
 
 **Prakruthi Koteshwar**
